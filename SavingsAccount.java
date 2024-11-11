@@ -1,22 +1,21 @@
 public class SavingsAccount extends BankAccount {
 
      
-    
-    public SavingsAccount(String accountNumber, double interestRate, int balance){
-        
-        super(accountNumber, interestRate, balance);
-
-     }
 
     public SavingsAccount() {
         
-        super("0000-0000-0000-0000", 0, 0);
+        this.accountNumber = "0000-0000-0000-0000";
+        this.interestRate = 0;
+        this.balance = 0;
+        this.accountType = "Savings";
 
     }
 
+    
+
     public int getBalance(){
 
-        return 125;
+        return balance;
 
     }
 
@@ -30,7 +29,8 @@ public class SavingsAccount extends BankAccount {
         }
         else {
             
-            balance = balance - amount;
+            balance -= amount;
+            
             return true;
         }
     }
@@ -58,17 +58,29 @@ public class SavingsAccount extends BankAccount {
         if (balance < 0) {
             interestAmount = 0;
                     
-        return 125;
-        }            
-            return  125;
+        return getBalance();
+        }         balance = (int) (interestAmount + balance);   
+            return  balance;
         }
         
     
 
     public String getAccountInfo() {
+            
+        String info = "";
         
+        info += "Account type  : Savings\n";
+        info += "Account #     : " + accountNumber + "\n";
+        info += "Balance       : " + String.format("$%.2f", (balance / 100.0)) + "\n";
+        info += "Interest rate : " + String.format("%.2f%%", (interestRate * 100)) + "\n";
+        //info += "Credit limit  : " + String.format("$%.2f", (creditLimit / 100.0)) + "\n";
         
-        return String.format("Account type : %s\nAccount # : %d\nBalance : $%.2f\nInterest rate : %.2f%%", accountNumber, balance, interestRate);
+        return info;
+        }
+
+
+        
+
     }
 
    
@@ -79,4 +91,4 @@ public class SavingsAccount extends BankAccount {
 
 
 
-}
+

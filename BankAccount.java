@@ -3,16 +3,10 @@ public abstract class BankAccount {
     String accountNumber;
     double interestRate;
     int balance; 
+    String accountType;
 
 
-
-    public BankAccount(String accountNumber, double interestRate, int balance){
-
-        this.accountNumber = accountNumber;
-        this.interestRate = interestRate;
-        this.balance = balance;
-
-    }
+    
 
 
     public boolean credit(int amount){
@@ -27,7 +21,7 @@ public abstract class BankAccount {
 
 
     public int getBalance(){
-        balance = 125;
+        
         return balance;
 
     }

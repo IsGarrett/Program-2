@@ -3,36 +3,37 @@ public class CheckingAccount extends BankAccount{
     int overdraftFee;
 
 
-    public CheckingAccount(String accountNumber, double interestRate, int balance) {
+    public CheckingAccount() {
 
-        super(accountNumber, interestRate, balance);
+        
+            this.accountNumber = "0000-0000-0000-0000";
+            this.interestRate = 0;
+            this.balance = 0;
+            this.overdraftFee = 0;
+    
+        }
 
-    }
 
-
-    public CheckingAccount(){
-
-        super("0000-0000-0000-0000", 0, 0);
-
-    }
+    
 
     public int getBalance(){
 
-        return balance + 125;
+        
+        return balance;
 
     }
  
     public boolean debit(int amount) {
        
-        balance = balance - amount;
+        balance -= amount;
 
         if (balance < 0) {
-            balance = balance - overdraftFee - amount;
+            balance -= overdraftFee;
         }
-        
+            
         return true;
-        
     }
+    
 
     public int getOverdraftFee(){
 
@@ -48,26 +49,34 @@ public class CheckingAccount extends BankAccount{
     }
 
     public double applyInterest() {
-        
-        double interestAmount;
-        
-        if (balance < 0) {
-            interestAmount = (int) (interestRate * 0);
-            return interestAmount; 
-        }
+       
+        setInterestRate(interestRate);
+        double interestAmount  = getInterestRate() * balance;
 
-        interestAmount = (interestRate * balance);
-        
-        return interestAmount + balance;
-            
-        } 
+        if (balance < 0) {
+            interestAmount = 0;
+                    
+        } else 
+            {           
+                balance += interestAmount;
+        }
+        return getBalance();
+    }
     
 
     
     public String getAccountInfo() {
         
-        return String.format("Account type : %s\nAccount # : %d\nBalance : $%.2f\nInterest rate : %.2f%%", accountNumber, balance, interestRate);
-
+        String info = "";
+        
+        info += "Account type  : Checking\n";
+        info += "Account #     : " + accountNumber + "\n";
+        info += "Balance       : " + String.format("$%.2f", (balance / 100.0)) + "\n";
+        info += "Interest rate : " + String.format("%.2f%%", (interestRate * 100)) + "\n";
+        //info += "Credit limit  : " + String.format("$%.2f", (creditLimit / 100.0)) + "\n";
+        info += "Overdraft fee : " + String.format("$%.2f", (overdraftFee / 100.0)) + "\n";
+        
+        return info;
     }
     
 }

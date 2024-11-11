@@ -1,47 +1,44 @@
 public class CreditcardAccount extends BankAccount {
 
-    int creditlimit;
+    int creditLimit;
 
 
-    public CreditcardAccount(String accountNumber, double interestRate, int balance) {
+    public CreditcardAccount() {
 
-        super(accountNumber, interestRate, balance);
-
-    }
-
-    public CreditcardAccount(){
-        
-        super("0000-0000-0000-0000", 0, 0);
-
-    }
+            this.accountNumber = "0000-0000-0000-0000";
+            this.interestRate = 0;
+            this.balance = 0;
+            this.creditLimit = 0;
+    
+        }
 
     public int getBalance(){
 
-        return 12555;
+        return balance;
 
     }
 
     
     public boolean debit(int amount) {
        
-        balance = amount - balance;
+        
 
-        if (balance >= creditlimit) {
+        if (balance - amount < -creditLimit) {
             return false;
         }
-        
+        balance -= amount;
         return true;
     }
 
-    public void setCreditLimit(int creditlimit){
+    public void setCreditLimit(int creditLimit){
 
-        this.creditlimit = creditlimit;
+        this.creditLimit = creditLimit;
 
     }
 
     public int getCreditLimit(){
 
-        return creditlimit;
+        return creditLimit;
 
     }
 
@@ -59,26 +56,30 @@ public class CreditcardAccount extends BankAccount {
 
     }
 
-
-    
     public double applyInterest() {
+       
+       
+            
+            double interestAmount  = getInterestRate() * balance;
+    
+                       
+                balance += interestAmount;
 
-        setInterestRate(interestRate);
-        double interestAmount; 
-        
-
-        if (balance < 0) {
-            interestAmount = 0;
-                    
-        return 125;
-        }            
-            return 125;
-        }
+                return getBalance();
+            }
 
    
     public String getAccountInfo() {
         
-        return String.format("Account type : %s\nAccount # : %d\nBalance : $%.2f\nInterest rate : %.2f%%", accountNumber, balance, interestRate);
+        String info = "";
+        
+        info += "Account type  : Creditcard\n";
+        info += "Account #     : " + accountNumber + "\n";
+        info += "Balance       : " + String.format("$%.2f", (balance / 100.0)) + "\n";
+        info += "Interest rate : " + String.format("%.2f%%", (interestRate * 100)) + "\n";
+        info += "Credit limit  : " + String.format("$%.2f", (creditLimit / 100.0)) + "\n";
+        
+        return info;
 
     }
     
