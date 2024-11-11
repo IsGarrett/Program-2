@@ -1,8 +1,11 @@
+
+//Credit card class extends BankAccount
 public class CreditcardAccount extends BankAccount {
 
+    //---Data---
     int creditLimit;
 
-
+    //Constructor
     public CreditcardAccount() {
 
             this.accountNumber = "0000-0000-0000-0000";
@@ -12,17 +15,17 @@ public class CreditcardAccount extends BankAccount {
     
         }
 
+    //returns the balance of the account
     public int getBalance(){
 
         return balance;
 
     }
 
-    
+    //debit method for debitting accounts
+    //subtracts any overdraft fee, if there is one.
     public boolean debit(int amount) {
        
-        
-
         if (balance - amount < -creditLimit) {
             return false;
         }
@@ -30,45 +33,46 @@ public class CreditcardAccount extends BankAccount {
         return true;
     }
 
+    //sets the credit card limit amount
     public void setCreditLimit(int creditLimit){
 
         this.creditLimit = creditLimit;
 
     }
 
+    //returns the credit limit
     public int getCreditLimit(){
 
         return creditLimit;
 
     }
 
-
+    //returns the interest rate
     public double getInterestRate() {
 
         return interestRate;
 
     }
 
-
+    //sets the interest rate for the account
     public void setInterestRate(double interestRate) {
 
         this.interestRate = interestRate;
 
     }
 
+    //applies the interest accrued for the account
     public double applyInterest() {
        
-       
-            
-            double interestAmount  = getInterestRate() * balance;
+       double interestAmount  = getInterestRate() * balance;
     
-                       
-                balance += interestAmount;
+        balance += interestAmount;
 
-                return getBalance();
-            }
+        return getBalance();
+        }
 
    
+     //returns the account info in a formatted String
     public String getAccountInfo() {
         
         String info = "";

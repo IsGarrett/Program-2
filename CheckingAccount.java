@@ -1,8 +1,11 @@
+
+//Checking account class that extends BankAccount
 public class CheckingAccount extends BankAccount{
 
+    //---Data----
     int overdraftFee;
 
-
+    //Constructor 
     public CheckingAccount() {
 
         
@@ -15,7 +18,7 @@ public class CheckingAccount extends BankAccount{
 
 
     
-
+    //returns the balance of the account
     public int getBalance(){
 
         
@@ -23,6 +26,8 @@ public class CheckingAccount extends BankAccount{
 
     }
  
+    //debit method for debitting accounts
+    //subtracts any overdraft fee, if there is one.
     public boolean debit(int amount) {
        
         balance -= amount;
@@ -34,7 +39,7 @@ public class CheckingAccount extends BankAccount{
         return true;
     }
     
-
+    //returns the overdraft fee
     public int getOverdraftFee(){
 
         return overdraftFee;
@@ -42,12 +47,16 @@ public class CheckingAccount extends BankAccount{
             
     }
 
+    //sets the overdraft fee for the account 
     public void setOverdraftFee(int overdraftFee){
 
         this.overdraftFee = overdraftFee;
 
     }
 
+    //applies the interest for the account
+    //determines if the account is eligible if the account is more than zero
+    //if so, it will calculate the interest accrued then add it to the balance
     public double applyInterest() {
        
         setInterestRate(interestRate);
@@ -64,7 +73,7 @@ public class CheckingAccount extends BankAccount{
     }
     
 
-    
+    //returns the account info in a formatted String
     public String getAccountInfo() {
         
         String info = "";
